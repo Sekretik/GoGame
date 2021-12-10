@@ -28,13 +28,12 @@ public class Game {
             color = StoneColor.BLACK;//delete
         }else color = StoneColor.WHITE;//delete
         //-------------------------------^
-        if(x >= 0 && y >= 0 && x <= 8 && y <= 8 && !isFieldOccupied(x,y)) {
+        if(x >= 0 && y >= 0 && x <= (lines-1) && y <= (lines-1) && !isFieldOccupied(x,y)) {
             Stone stone = new Stone(x, y, color);
             stones.add(stone);
-            panel.addStone(stone);
-            //-------------------------------
-            turn += 1;//delete
-            //-------------------------------^
+            panel.setArray(stones);
+            chekLives(stone);
+            turn += 1;
         }
     }
 
@@ -46,5 +45,31 @@ public class Game {
             }
         }
        return bool;
+    }
+
+    public void chekLives(Stone stone){
+        for (Stone s1 : stones) {
+            s1.setLives(4);
+            for (Stone s2 : stones) {
+                if(s1.getX() == s2.getX()-1 && s1.getY() == s2.getY()) {
+                    s1.setLives(s1.getLives()-1);
+                }
+                if(s1.getX() == s2.getX()+1 && s1.getY() == s2.getY()) {
+                    s1.setLives(s1.getLives()-1);
+                }
+                if(s1.getY() == s2.getY()-1 && s1.getX() == s2.getX()) {
+                    s1.setLives(s1.getLives()-1);
+                }
+                if(s1.getY() == s2.getY()+1 && s1.getX() == s2.getX()) {
+                    s1.setLives(s1.getLives()-1);
+                }
+            }
+        }
+        for(int i = 0;i< stones.size();i++){
+            if(stones.get(i).getLives()<=0 && stone != stones.get(i)){
+                stones.remove(i);
+                i-=1;
+            }
+        }
     }
 }

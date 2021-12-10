@@ -66,8 +66,8 @@ public class GamePanel extends JPanel {
         }
     }
 
-    public void addStone(Stone stone) {
-        stones.add(stone);
+    public void setArray(ArrayList<Stone> array){
+        stones = array;
         repaint();
     }
 }
