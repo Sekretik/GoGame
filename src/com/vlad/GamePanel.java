@@ -54,15 +54,13 @@ public class GamePanel extends JPanel {
 
     public void drawStones() {
         for (Stone s : stones) {
-            if(s.getTeam() == StoneColor.WHITE){
-                g.setColor(Color.white);
+            if (s.getTeam() != StoneColor.VOID) {
+                if (s.getTeam() == StoneColor.WHITE) {
+                    g.setColor(Color.white);
+                }
+                g.fillOval((s.getX() * sizeBtwLine), (s.getY() * sizeBtwLine), sizeBtwLine, sizeBtwLine);
+                g.setColor(Color.black);
             }
-            g.fillOval((s.getX() * sizeBtwLine),(s.getY() * sizeBtwLine),sizeBtwLine,sizeBtwLine);
-            //-------------------------------
-            g.setColor(Color.blue);//delete
-            g.drawString(String.valueOf(s.getLives()),(s.getX() * sizeBtwLine)+sizeBtwLine/2,(s.getY() * sizeBtwLine)+sizeBtwLine/2);//delete
-            //-------------------------------
-            g.setColor(Color.black);
         }
     }
 
