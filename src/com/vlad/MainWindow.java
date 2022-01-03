@@ -10,7 +10,7 @@ public class MainWindow extends JFrame {
         setFocusable(true);
         setTitle("GoGame");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(sizeBtwLine * lines + 250,sizeBtwLine * lines + sizeBtwLine/2);
+        setSize(sizeBtwLine * lines + 250,sizeBtwLine * lines + sizeBtwLine/2+13);
         setLocation(500,100);
         add(new GamePanel(lines,sizeBtwLine,game));
         setResizable(false);
