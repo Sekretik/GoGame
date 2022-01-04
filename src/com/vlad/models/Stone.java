@@ -1,4 +1,4 @@
-package com.vlad;
+package com.vlad.models;
 
 import java.util.ArrayList;
 

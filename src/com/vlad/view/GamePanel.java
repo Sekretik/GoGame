@@ -1,4 +1,8 @@
-package com.vlad;
+package com.vlad.view;
+
+import com.vlad.gamelogic.Game;
+import com.vlad.models.Stone;
+import com.vlad.models.StoneColor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +66,7 @@ public class GamePanel extends JPanel {
 
                 g.setColor(Color.blue);
                 //g.drawString(String.valueOf(s.lives),(s.x * sizeBtwLine) + sizeBtwLine/2,(s.y * sizeBtwLine) + sizeBtwLine/2);
-                g.drawString(String.valueOf(s.group.id),(s.x * sizeBtwLine) + sizeBtwLine/2,(s.y * sizeBtwLine) + sizeBtwLine/2);
+                //g.drawString(String.valueOf(s.group.id),(s.x * sizeBtwLine) + sizeBtwLine/2,(s.y * sizeBtwLine) + sizeBtwLine/2);
                 //g.drawString(String.valueOf(s.group.lives),(s.x * sizeBtwLine) + sizeBtwLine/2,(s.y * sizeBtwLine) + sizeBtwLine/2);
 
                 g.setColor(Color.black);

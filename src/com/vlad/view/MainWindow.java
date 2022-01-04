@@ -1,4 +1,6 @@
-package com.vlad;
+package com.vlad.view;
+
+import com.vlad.gamelogic.Game;
 
 import javax.swing.*;
 

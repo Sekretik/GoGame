@@ -1,4 +1,11 @@
-package com.vlad;
+package com.vlad.gamelogic;
+
+import com.vlad.models.History;
+import com.vlad.models.Stone;
+import com.vlad.models.StoneColor;
+import com.vlad.models.StoneStatus;
+import com.vlad.view.GamePanel;
+import com.vlad.view.MainWindow;
 
 import java.util.ArrayList;
 
@@ -6,13 +13,15 @@ public class Game {
 
     private GamePanel panel;
     private ArrayList<Stone> stones = new ArrayList<>();
-    private ArrayList<Stone> voidStones = new ArrayList<>();
-    private int lines = 9;
-    private int turn = 1;
+    private int lines;
+    private int turn = 0;
+    History history = new History();
 
-    public Game(){
-       for(int i = 0; i < lines; i ++){
-           voidStones.add(new Stone(i,-1,StoneColor.VOID));
+    public Game(int lines){
+        this.lines = lines;
+        ArrayList<Stone> voidStones = new ArrayList<>();
+        for(int i = 0; i < lines; i ++){
+           voidStones.add(new Stone(i,-1, StoneColor.VOID));
            voidStones.add(new Stone(i,lines,StoneColor.VOID));
            voidStones.add(new Stone(-1,i,StoneColor.VOID));
            voidStones.add(new Stone(lines,i,StoneColor.VOID));
@@ -30,19 +39,29 @@ public class Game {
         x = (x - x%50)/50;
         y = (y - y%50)/50;
 
-        StoneColor color;
-        if(turn%2==1){
-            color = StoneColor.BLACK;
-        }else color = StoneColor.WHITE;
-
         if(x >= 0 && y >= 0 && x <= (lines-1) && y <= (lines-1) && !isFieldOccupied(x,y)) {
+            turn += 1;
+
+            StoneColor color;
+            if(turn%2==1){
+                color = StoneColor.BLACK;
+            }else color = StoneColor.WHITE;
+
             Stone stone = new Stone(x, y, color);
             stones.add(stone);
             stone.group.id = turn;
-            chekLives();
-            panel.setArray(stones);
-            turn += 1;
+
+            history.add(new ArrayList<>());
+            history.get(turn).addAll(stones);
+
+            if(turn > 2 && history.isEqual(turn,turn-2)){
+                turn -=1;
+                history.back();
+                stones = new ArrayList<>(history.get(turn));
+            }
         }
+        chekLives();
+        panel.setArray(stones);
     }
 
     private void chekLives(){
